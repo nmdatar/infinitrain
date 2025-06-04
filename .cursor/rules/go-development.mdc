@@ -1,0 +1,54 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Go Development Standards
+
+## Code Style
+- Follow official Go formatting with `gofmt` and `goimports`
+- Use `golangci-lint` for comprehensive linting
+- Follow Go naming conventions (camelCase for private, PascalCase for public)
+- Use meaningful package names (short, lowercase, no underscores)
+- Keep functions small and focused
+
+## Project Structure
+```
+infinitrain/
+├── cmd/           # Main applications
+├── internal/      # Private application code
+├── pkg/           # Public library code
+├── api/           # API definitions (protobuf, OpenAPI)
+├── configs/       # Configuration files
+├── scripts/       # Build and deployment scripts
+├── test/          # Integration tests
+└── docs/          # Documentation
+```
+
+## Distributed Systems Best Practices
+- Use context for cancellation and timeouts
+- Implement proper error handling and wrapping
+- Use structured logging (logrus, zap)
+- Implement circuit breakers for external calls
+- Use proper synchronization primitives (channels, mutexes)
+- Handle graceful shutdowns
+
+## Performance & Concurrency
+- Prefer channels over shared memory
+- Use worker pools for bounded concurrency
+- Profile with pprof for performance optimization
+- Implement proper backpressure mechanisms
+- Use connection pooling for databases/services
+
+## Testing
+- Write table-driven tests
+- Use testify for assertions and mocking
+- Test concurrent code with race detector
+- Implement benchmarks for performance-critical code
+- Use integration tests for distributed components
+
+## Error Handling
+- Use errors.Is() and errors.As() for error checking
+- Wrap errors with context using fmt.Errorf()
+- Create custom error types for domain-specific errors
+- Log errors at boundaries, return them everywhere else

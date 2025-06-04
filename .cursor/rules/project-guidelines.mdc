@@ -1,0 +1,40 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# InfiniTrain Project Guidelines
+
+## Project Context
+This is the InfiniTrain project - please maintain consistency with the existing codebase and follow these guidelines.
+
+## Code Style & Standards
+- Use consistent indentation (2 spaces for JS/TS/JSON, 4 spaces for Python)
+- Follow semantic naming conventions
+- Write clear, descriptive comments for complex logic
+- Prefer functional programming patterns where appropriate
+- Use TypeScript for type safety when applicable
+
+## File Organization
+- Keep related files grouped in logical directories
+- Use clear, descriptive file and folder names
+- Separate concerns (components, utilities, types, etc.)
+
+## Best Practices
+- Write tests for new functionality
+- Handle errors gracefully
+- Use environment variables for configuration
+- Follow security best practices
+- Optimize for performance and maintainability
+
+## Documentation
+- Update README.md when adding new features
+- Document API endpoints and data structures
+- Include setup and deployment instructions
+- Add inline comments for complex algorithms
+
+## Git Workflow
+- Write clear, descriptive commit messages
+- Keep commits focused and atomic
+- Use conventional commit format when possible
+- Review changes before committing

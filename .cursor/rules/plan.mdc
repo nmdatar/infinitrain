@@ -1,0 +1,229 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# InfiniTrain: Distributed Job Training System - 4-Day MVP Plan
+
+## Project Overview
+InfiniTrain MVP - A lightweight distributed job execution system built in Go, focusing on core functionality to get a working system operational within 4 days.
+
+## MVP Architecture (Simplified)
+
+### Core Components (MVP)
+1. **Job Scheduler** - Simple job dispatcher
+2. **Worker Nodes** - Basic job execution units
+3. **In-Memory Queue** - Simple job queue (Redis for persistence)
+4. **REST API** - Basic job submission and status
+5. **Simple Monitoring** - Basic health checks and status
+
+### Technology Stack (MVP)
+- **Language**: Go 1.21+
+- **Queue**: Redis (simple pub/sub)
+- **Storage**: Redis (job state) + local files
+- **Communication**: HTTP REST + simple websockets
+- **Monitoring**: Built-in HTTP endpoints
+- **Deployment**: Docker Compose
+
+## 4-Day Implementation Plan
+
+### Day 1: Foundation & Basic Job System
+**Goal**: Working job submission and execution
+
+#### Morning (4 hours)
+- [x] Initialize Go project structure
+- [x] Set up basic configuration management
+- [x] Create core job types and interfaces
+- [x] Implement simple in-memory job storage
+
+#### Afternoon (4 hours)
+- [ ] Build basic REST API for job submission
+- [ ] Create simple job execution engine
+- [ ] Implement basic worker node structure
+- [ ] Add simple logging
+
+**Day 1 Deliverable**: Single-node job execution system
+
+### Day 2: Distribution & Communication
+**Goal**: Multi-node job distribution
+
+#### Morning (4 hours)
+- [ ] Integrate Redis for job queue
+- [ ] Implement worker registration system
+- [ ] Create job distribution logic
+- [ ] Add worker discovery mechanism
+
+#### Afternoon (4 hours)
+- [ ] Build worker-scheduler communication
+- [ ] Implement job status tracking
+- [ ] Add basic retry mechanism
+- [ ] Create health check endpoints
+
+**Day 2 Deliverable**: Multi-worker distributed system
+
+### Day 3: Reliability & Management
+**Goal**: Fault tolerance and job management
+
+#### Morning (4 hours)
+- [ ] Implement worker failure detection
+- [ ] Add job redistribution on worker failure
+- [ ] Create job cancellation mechanism
+- [ ] Build job history and logging
+
+#### Afternoon (4 hours)
+- [ ] Add job priority handling
+- [ ] Implement basic resource limits
+- [ ] Create management API endpoints
+- [ ] Build simple web dashboard
+
+**Day 3 Deliverable**: Reliable job execution with management interface
+
+### Day 4: Polish & Deployment
+**Goal**: Production-ready deployment
+
+#### Morning (4 hours)
+- [ ] Create Docker containers
+- [ ] Set up Docker Compose deployment
+- [ ] Add configuration management
+- [ ] Implement graceful shutdowns
+
+#### Afternoon (4 hours)
+- [ ] Add metrics collection
+- [ ] Create CLI tool for job management
+- [ ] Write documentation and examples
+- [ ] Performance testing and optimization
+
+**Day 4 Deliverable**: Deployable distributed job system
+
+## Simplified Project Structure
+
+```
+infinitrain/
+├── cmd/
+│   ├── scheduler/          # Main scheduler service
+│   ├── worker/            # Worker node service
+│   └── cli/               # CLI tool
+├── internal/
+│   ├── api/               # REST API handlers
+│   ├── scheduler/         # Job scheduling logic
+│   ├── worker/           # Job execution logic
+│   ├── queue/            # Redis queue operations
+│   └── config/           # Configuration
+├── pkg/
+│   ├── job/              # Job types and interfaces
+│   └── client/           # Go client library
+├── web/                  # Simple web dashboard
+├── configs/              # Configuration files
+├── docker/               # Docker files
+└── examples/             # Usage examples
+```
+
+## MVP Features List
+
+### Core Features (Must Have)
+- [x] Job submission via REST API
+- [ ] Distributed job execution across multiple workers
+- [ ] Job status tracking and querying
+- [ ] Worker node registration and health monitoring
+- [ ] Basic job retry on failure
+- [ ] Simple web dashboard for monitoring
+- [ ] Docker-based deployment
+
+### Job Types Supported
+- **Command Jobs**: Execute shell commands
+- **Script Jobs**: Run bash/shell scripts
+- **HTTP Jobs**: Make HTTP requests
+- **File Processing**: Basic file operations
+
+### API Endpoints (MVP)
+```
+POST   /api/v1/jobs              # Submit new job
+GET    /api/v1/jobs              # List jobs
+GET    /api/v1/jobs/{id}         # Get job status
+DELETE /api/v1/jobs/{id}         # Cancel job
+GET    /api/v1/workers           # List workers
+GET    /api/v1/health            # System health
+GET    /api/v1/metrics           # Basic metrics
+```
+
+## Configuration (Simple YAML)
+```yaml
+# config.yaml
+scheduler:
+  port: 8080
+  redis_url: "redis://localhost:6379"
+
+worker:
+  scheduler_url: "http://localhost:8080"
+  max_concurrent_jobs: 5
+  heartbeat_interval: 30s
+
+logging:
+  level: info
+  format: json
+```
+
+## Job Specification (Simple JSON)
+```json
+{
+  "id": "job-123",
+  "type": "command",
+  "command": "echo 'Hello World'",
+  "timeout": "5m",
+  "retries": 3,
+  "priority": 1,
+  "tags": ["example", "test"]
+}
+```
+
+## Success Criteria (MVP)
+- [ ] Handle 100+ concurrent jobs
+- [ ] Support 5+ worker nodes
+- [ ] Job completion within 1 minute for simple tasks
+- [ ] Worker failure detection within 30 seconds
+- [ ] 95% job success rate
+- [ ] Easy deployment with docker-compose up
+
+## Development Approach
+
+### Day-by-Day Focus
+1. **Day 1**: Get basic single-node working
+2. **Day 2**: Make it distributed
+3. **Day 3**: Make it reliable
+4. **Day 4**: Make it deployable
+
+### Shortcuts for Speed
+- Use Redis for everything (queue + storage)
+- HTTP REST instead of gRPC
+- Simple JSON configs instead of complex validation
+- In-memory state with Redis backup
+- Basic HTML dashboard instead of fancy UI
+- Docker Compose instead of Kubernetes
+
+### Testing Strategy (Minimal)
+- Unit tests for core business logic only
+- Integration test for end-to-end job flow
+- Manual testing for distributed scenarios
+- Load test with 100 concurrent jobs
+
+## Quick Start Commands
+```bash
+# Day 1 - Setup
+go mod init infinitrain
+make setup
+
+# Day 2 - Run distributed
+docker-compose up redis
+make run-scheduler
+make run-worker
+
+# Day 3 - Test system
+make test-integration
+curl -X POST localhost:8080/api/v1/jobs -d @example-job.json
+
+# Day 4 - Deploy
+docker-compose up -d
+```
+
+## Next Steps
+Ready to start Day 1 implementation! The plan focuses on building a working MVP that demonstrates distributed job execution with the core features needed for a functional system.
