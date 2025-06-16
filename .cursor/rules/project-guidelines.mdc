@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: false
 ---
 # InfiniTrain Project Guidelines
@@ -8,6 +8,10 @@ alwaysApply: false
 ## Project Context
 This is the InfiniTrain project - please maintain consistency with the existing codebase and follow these guidelines.
 
+## Project Goal
+- The goal of this project is to get experience implementing a distributed ai job scheduler. 
+## Code Choice
+- Implement the code and optimizations in Go, unless otherwise specified or required. 
 ## Code Style & Standards
 - Use consistent indentation (2 spaces for JS/TS/JSON, 4 spaces for Python)
 - Follow semantic naming conventions

@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: false
 ---
 # InfiniTrain: Distributed Job Training System - 4-Day MVP Plan
@@ -74,7 +74,7 @@ InfiniTrain MVP - A lightweight distributed job execution system built in Go, fo
 - [ ] Add job priority handling
 - [ ] Implement basic resource limits
 - [ ] Create management API endpoints
-- [ ] Build simple web dashboard
+- [ ] Add comprehensive monitoring endpoints
 
 **Day 3 Deliverable**: Reliable job execution with management interface
 
@@ -112,7 +112,6 @@ infinitrain/
 ├── pkg/
 │   ├── job/              # Job types and interfaces
 │   └── client/           # Go client library
-├── web/                  # Simple web dashboard
 ├── configs/              # Configuration files
 ├── docker/               # Docker files
 └── examples/             # Usage examples
@@ -126,7 +125,7 @@ infinitrain/
 - [ ] Job status tracking and querying
 - [ ] Worker node registration and health monitoring
 - [ ] Basic job retry on failure
-- [ ] Simple web dashboard for monitoring
+- [ ] CLI tool for job and worker management
 - [ ] Docker-based deployment
 
 ### Job Types Supported
@@ -197,7 +196,7 @@ logging:
 - HTTP REST instead of gRPC
 - Simple JSON configs instead of complex validation
 - In-memory state with Redis backup
-- Basic HTML dashboard instead of fancy UI
+- CLI tool instead of web interface
 - Docker Compose instead of Kubernetes
 
 ### Testing Strategy (Minimal)

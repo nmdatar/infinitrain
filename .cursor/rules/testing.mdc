@@ -3,3 +3,94 @@ description:
 globs:
 alwaysApply: false
 ---
+# Testing Guidelines
+
+## General Testing Principles
+- Write tests before or alongside implementation (TDD/BDD)
+- Each test should be independent and isolated
+- Use descriptive test names that explain the behavior being tested
+- Follow the AAA pattern: Arrange, Act, Assert
+- Keep tests simple and focused on one behavior
+
+## Test Structure
+- Group related tests using describe/context blocks
+- Use setup and teardown methods appropriately
+- Mock external dependencies and services
+- Use test data factories or fixtures for consistent test data
+
+## Frontend Testing (Jest/React Testing Library)
+- Test user interactions, not implementation details
+- Use screen queries to find elements
+- Test accessibility features
+- Mock API calls and external services
+- Test error states and loading states
+
+## Backend Testing (pytest)
+- Test all API endpoints with various inputs
+- Test database operations with transactions
+- Use fixtures for database setup/teardown
+- Test authentication and authorization
+- Test error handling and edge cases
+
+## Coverage Goals
+- Aim for 80%+ code coverage
+- Focus on critical business logic
+- Don't sacrifice quality for coverage numbers
+- Include integration tests for key workflows
+
+# Go Testing Guidelines
+
+## Test Structure
+- Use table-driven tests for multiple test cases
+- Follow the `TestXxx(t *testing.T)` naming convention
+- Use subtests with `t.Run()` for organized test cases
+- Keep tests in the same package with `_test.go` suffix
+- Use `testing.T` for unit tests, `testing.B` for benchmarks
+
+## Table-Driven Tests
+```go
+func TestFunction(t *testing.T) {
+    tests := []struct {
+        name     string
+        input    InputType
+        expected OutputType
+        wantErr  bool
+    }{
+        // test cases
+    }
+    
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            // test logic
+        })
+    }
+}
+```
+
+## Distributed System Testing
+- Use test containers for integration tests
+- Mock external dependencies with interfaces
+- Test timeout and cancellation scenarios
+- Verify concurrent operations with race detector
+- Test failure scenarios and recovery mechanisms
+
+## Performance Testing
+- Write benchmarks for performance-critical code
+- Use `go test -bench=. -benchmem` for memory profiling
+- Test with realistic data sizes
+- Measure latency and throughput separately
+- Profile with pprof for bottleneck identification
+
+## Test Utilities
+- Use testify/assert for cleaner assertions
+- Use testify/mock for mocking dependencies
+- Create test fixtures for complex data
+- Use httptest for HTTP service testing
+- Implement test helpers for common setup
+
+## Coverage and Quality
+- Aim for 80%+ test coverage
+- Focus on edge cases and error paths
+- Test public APIs thoroughly
+- Use `go test -race` to detect race conditions
+- Run tests in CI with multiple Go versions
